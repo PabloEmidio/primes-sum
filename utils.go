@@ -57,7 +57,7 @@ func discoverPrimes(checkingNumber int) {
 		discoverUnits := int(checkingNumber / unitDiscoverProcess)
 
 		if discoverUnits == 0 {
-			discoverPrimesUnit(checkingNumber, discoverUnits, maxNumberCached)
+			discoverPrimesUnit(checkingNumber, 0, maxNumberCached)
 		} else{
 			discoverProcessDone = false
 
