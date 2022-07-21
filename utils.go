@@ -67,7 +67,7 @@ func discoverPrimes(checkingNumber int) {
 				if i > 1 {
 					go discoverPrimesUnit(i * unitDiscoverProcessDivision, (i - 1) * unitDiscoverProcessDivision, maxNumberCached)
 				} else {
-					go discoverPrimesUnit(checkingNumber - unitDiscoverProcessDivision * int(discoverUnits), 0, maxNumberCached)
+					go discoverPrimesUnit(checkingNumber - (unitDiscoverProcessDivision * int(discoverUnits)), 0, maxNumberCached)
 				}
 			}
 
