@@ -1,14 +1,17 @@
 package main
 
-import "math"
+import (
+	"math"
+	"sync"
+)
 
 
-const unitDiscoverProcessDivision int = 10000
+const unitDiscoverProcessDivision int = 5000
 var primeNumbersCache []int
-var discoverProcessDone bool = true
+var wg sync.WaitGroup
 
 
-func discoverPrimesUnit(initialNumber int, finalNumber int, maxNumberCached int) {
+func discoverPrimesUnit(initialNumber int, finalNumber int, maxNumberCached int, wg *sync.WaitGroup) {
 	simpleNotPrimeValidation := func(number int) bool {
 		return (number > 2 && number % 2 == 0) || (number > 5 && number % 5 == 0)
 	}
@@ -30,10 +33,7 @@ func discoverPrimesUnit(initialNumber int, finalNumber int, maxNumberCached int)
 		}
 		checkingNumber--
 	}
-
-	if finalNumber < maxNumberCached || finalNumber == 0 {
-		discoverProcessDone = true
-	}
+	defer wg.Done()
 }
 
 
@@ -44,21 +44,21 @@ func discoverPrimes(checkingNumber int) {
 		discoverUnits := float64(checkingNumber) / float64(unitDiscoverProcessDivision)
 
 		if int(discoverUnits) == 0 {
-			discoverPrimesUnit(checkingNumber, 0, maxNumberCached)
-		} else{
-			discoverProcessDone = false
+			discoverUnits = 1.0
+		}
 
-			for i := int(math.Ceil(discoverUnits)); i >= 1; i--{
-				if i > 1 {
-					go discoverPrimesUnit(i * unitDiscoverProcessDivision, (i - 1) * unitDiscoverProcessDivision, maxNumberCached)
+		for i := int(math.Ceil(discoverUnits)); i >= 1; i--{
+			wg.Add(1)
+			if i > 1 {
+				go discoverPrimesUnit(i * unitDiscoverProcessDivision, (i - 1) * unitDiscoverProcessDivision, maxNumberCached, &wg)
+			} else {
+				if checkingNumber > unitDiscoverProcessDivision {
+					go discoverPrimesUnit(checkingNumber - (unitDiscoverProcessDivision * int(discoverUnits)), 0, maxNumberCached, &wg)
 				} else {
-					go discoverPrimesUnit(checkingNumber - (unitDiscoverProcessDivision * int(discoverUnits)), 0, maxNumberCached)
+					go discoverPrimesUnit(checkingNumber, 0, maxNumberCached, &wg)
 				}
 			}
-
-			for {
-				if discoverProcessDone { break }
-			}
 		}
+		wg.Wait()
 	}
 }
