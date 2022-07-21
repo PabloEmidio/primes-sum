@@ -17,36 +17,36 @@ For perfomance reasons, it's done a cache of all prime numbers found.
 ```sh
 $ git clone https://github.com/PabloEmidio/primes-sum
 $ cd primes-sum
-$ go build -o prime.out .
+$ make compile
+$ make exec
 ```
 
 ---
 
 ## Some examples
 ```bash
-[example@example ~]$ ./prime.out
+[example@example ~]$ make exec
 > Type a number: 50
 47 + 3 = 50
 43 + 7 = 50
 37 + 13 = 50
 31 + 19 = 50
+
+In 0h0min0s, it's was found 16 primes Number between 2 and 50
 ```
 
 ```bash
-[example@example ~]$ ./prime.out
-> Type a number: 100
-97 + 3 = 100
-97 + 3 = 100
-97 + 3 = 100
-89 + 11 = 100
-83 + 17 = 100
-71 + 29 = 100
-59 + 41 = 100
-53 + 47 = 100
-```
+[example@example ~]$ make exec
+> Type a number: 100000
+...
+80147 + 19853 = 100000
+80111 + 19889 = 100000
+80051 + 19949 = 100000
+80039 + 19961 = 100000
+80021 + 19979 = 100000
 
-```bash
-[example@example ~]$ ./prime.out
+In 0h0min2s, it's was found 8918 primes Number between 2 and 100000
+'
 > Type a number: 0
 Program ended!
 ```
