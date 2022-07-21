@@ -8,14 +8,14 @@ import (
 
 
 func printResult(number int){
-	primeNumbers := getAllPrimeNumberLowerThan(number)
+	discoverPrimes(number)
 
 	alreadyPrinted := func (valueOne int, valueTwo int) bool {
 		return valueTwo > valueOne
 	}
 
-	for _, v1 := range primeNumbers{
-		for _, v2 := range primeNumbers {
+	for _, v1 := range primeNumbersCache{
+		for _, v2 := range primeNumbersCache {
 			if v1 + v2 == number  && !alreadyPrinted(v1, v2){
 				fmt.Println(strconv.Itoa(v1) + " + " + strconv.Itoa(v2) + " = " + strconv.Itoa(number))
 			}
