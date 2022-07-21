@@ -1,7 +1,9 @@
 package main
 
+import "math"
 
-const unitDiscoverProcess int = 10000
+
+const unitDiscoverProcessDivision int = 10000
 var primeNumbersCache []int
 var discoverProcessDone bool = true
 
@@ -54,15 +56,19 @@ func discoverPrimes(checkingNumber int) {
 	maxNumberCached := max(primeNumbersCache)
 
 	if maxNumberCached < checkingNumber {
-		discoverUnits := int(checkingNumber / unitDiscoverProcess)
+		discoverUnits := float64(checkingNumber) / float64(unitDiscoverProcessDivision)
 
-		if discoverUnits == 0 {
+		if int(discoverUnits) == 0 {
 			discoverPrimesUnit(checkingNumber, 0, maxNumberCached)
 		} else{
 			discoverProcessDone = false
 
-			for i := discoverUnits; i >= 1; i--{
-				go discoverPrimesUnit(i * unitDiscoverProcess, (i - 1) * unitDiscoverProcess, maxNumberCached)
+			for i := int(math.Ceil(discoverUnits)); i >= 1; i--{
+				if i > 1 {
+					go discoverPrimesUnit(i * unitDiscoverProcessDivision, (i - 1) * unitDiscoverProcessDivision, maxNumberCached)
+				} else {
+					go discoverPrimesUnit(checkingNumber - unitDiscoverProcessDivision * int(discoverUnits), 0, maxNumberCached)
+				}
 			}
 
 			for {
