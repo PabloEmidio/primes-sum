@@ -11,6 +11,20 @@ var primeNumbersCache []int
 var wg sync.WaitGroup
 
 
+
+
+func getAllPrimeNumberLowerThan(number int) (primeNumbersSlice [] int){
+	discoverPrimes(number)
+	for _, v := range primeNumbersCache {
+		if v > number {
+			continue
+		}
+		primeNumbersSlice = append(primeNumbersSlice, v)
+	}
+	return
+}
+
+
 func discoverPrimesUnit(initialNumber int, finalNumber int, maxNumberCached int, wg *sync.WaitGroup) {
 	simpleNotPrimeValidation := func(number int) bool {
 		return (number > 2 && number % 2 == 0) || (number > 5 && number % 5 == 0)
