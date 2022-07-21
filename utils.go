@@ -35,10 +35,10 @@ func discoverPrimes(checkingNumber int) {
 
 	if maxNumberCached < checkingNumber {
 		simpleNotPrimeValidation := func(number int) bool {
-			return (number > 2 && number % 2 == 0) || (number > 5 && number % 5 == 0) 
+			return (number > 2 && number % 2 == 0) || (number > 5 && number % 5 == 0)
 		}
 
-		for checkingNumber > 1 {
+		for checkingNumber > maxNumberCached {
 			var isPrime bool = true
 			if simpleNotPrimeValidation(checkingNumber){
 				isPrime = false
