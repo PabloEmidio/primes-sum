@@ -3,7 +3,6 @@ package main
 
 import (
 	"time"
-	"strconv"
 )
 
 func max(iter []int) (greaterValue int ){
@@ -20,9 +19,5 @@ func max(iter []int) (greaterValue int ){
 }
 
 func getTimeInterval(initialTime time.Time, finalTime time.Time) string {
-	hoursPassed := strconv.Itoa(finalTime.Hour() - initialTime.Hour())
-	minutesPassed := strconv.Itoa(finalTime.Minute() - initialTime.Minute())
-	secondsPassed := strconv.Itoa(finalTime.Second() - initialTime.Second())
-
-	return hoursPassed + "h" + minutesPassed + "min" + secondsPassed + "s"
+	return finalTime.Sub(initialTime).String()
 }
