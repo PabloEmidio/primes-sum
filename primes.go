@@ -57,7 +57,7 @@ func discoverPrimes(checkingNumber int) {
 	if maxNumberCached < checkingNumber {
 		discoverUnits := float64(checkingNumber) / float64(unitDiscoverProcessDivision)
 
-		if int(discoverUnits) == 0 {
+		if int(math.Floor(discoverUnits)) == 0 {
 			discoverUnits = 1.0
 		}
 
