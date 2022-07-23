@@ -39,6 +39,7 @@ func discoverPrimesUnit(initialNumber int, finalNumber int, maxNumberCached int,
 			for i := 2; i < checkingNumber; i++ {
 				if checkingNumber % i == 0 {
 					isPrime = false
+					break
 				}
 			}
 		}
