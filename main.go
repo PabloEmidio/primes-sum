@@ -32,7 +32,6 @@ func printResult(number int){
 
 }
 
-
 func main(){
 	var number int
 

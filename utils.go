@@ -1,9 +1,9 @@
 package main
 
-
 import (
 	"time"
 )
+
 
 func max(iter []int) (greaterValue int ){
 	for i, value := range iter {

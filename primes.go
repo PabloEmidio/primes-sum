@@ -10,9 +10,6 @@ const unitDiscoverProcessDivision int = 5000
 var primeNumbersCache []int
 var wg sync.WaitGroup
 
-
-
-
 func getAllPrimeNumberLowerThan(number int) (primeNumbersSlice [] int){
 	discoverPrimes(number)
 	for _, v := range primeNumbersCache {
@@ -23,7 +20,6 @@ func getAllPrimeNumberLowerThan(number int) (primeNumbersSlice [] int){
 	}
 	return
 }
-
 
 func discoverPrimesUnit(initialNumber int, finalNumber int, maxNumberCached int, wg *sync.WaitGroup) {
 	simpleNotPrimeValidation := func(number int) bool {
@@ -50,7 +46,6 @@ func discoverPrimesUnit(initialNumber int, finalNumber int, maxNumberCached int,
 	}
 	defer wg.Done()
 }
-
 
 func discoverPrimes(checkingNumber int) {
 	maxNumberCached := max(primeNumbersCache)
