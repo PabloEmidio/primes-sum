@@ -1,6 +1,3 @@
- # Monty Hall problem using Go
-
-
 ## Objective
 Write a programme which will print all the pairs of prime numbers whose sum equals the number entered by the user.
 
